@@ -57,7 +57,7 @@ npm run deploy
 SimplePayment 배포 주소: 0x5Fb...
 ```
 
-배포 주소는 `deployed.json`에 저장됩니다. 이 파일은 실행 결과물이므로 Git에는 올리지 않습니다.
+배포 주소는 `deployed.localhost.json`에 저장됩니다. 이 파일은 실행 결과물이므로 Git에는 올리지 않습니다.
 
 ### 5. 결제 실행
 
@@ -84,6 +84,37 @@ npm run pay
 `npm run deploy`는 이 블록체인에 컨트랙트를 올리고, `npm run pay`는 같은 블록체인에 있는 컨트랙트를 호출합니다.
 
 노드를 끄면 로컬 블록체인 상태가 사라집니다. 그러면 이전에 배포한 컨트랙트 주소도 더 이상 유효하지 않습니다.
+
+## Base Sepolia 준비
+
+로컬 실습이 끝나면 같은 컨트랙트를 Base Sepolia 테스트넷에도 배포할 수 있습니다.
+
+### 1. 환경변수 파일 생성
+
+```bash
+cp .env.example .env
+```
+
+`.env`에 테스트넷 배포용 지갑 개인키를 넣습니다.
+
+```text
+BASE_SEPOLIA_RPC_URL=https://sepolia.base.org
+PRIVATE_KEY=테스트넷_지갑_개인키
+```
+
+실제 자산이 들어 있는 메인넷 지갑 개인키는 절대 사용하지 않습니다.
+
+### 2. 테스트넷 ETH 준비
+
+Base Sepolia에 배포하려면 배포 지갑에 Base Sepolia ETH가 필요합니다.
+
+### 3. Base Sepolia 배포
+
+```bash
+npx hardhat run scripts/deploy.js --network baseSepolia
+```
+
+배포 주소는 `deployed.baseSepolia.json`에 저장됩니다.
 
 ## Commit Message Rule
 

@@ -4,4 +4,4 @@ cache/
 typechain-types/
 .env
 deployed.json
-
+deployed.*.json

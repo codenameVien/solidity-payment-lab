@@ -1,8 +1,11 @@
 const { ethers } = require("hardhat");
+const hre = require("hardhat");
 const fs = require("fs");
 
 async function main() {
-  const deployed = JSON.parse(fs.readFileSync("deployed.json", "utf8"));
+  const deployed = JSON.parse(
+    fs.readFileSync(`deployed.${hre.network.name}.json`, "utf8")
+  );
   const contractAddress = deployed.SimplePayment;
 
   const [, payer] = await ethers.getSigners();
@@ -35,4 +38,3 @@ main().catch((error) => {
   console.error(error);
   process.exitCode = 1;
 });
-
