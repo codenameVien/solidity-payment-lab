@@ -1,4 +1,5 @@
 const { ethers } = require("hardhat");
+const hre = require("hardhat");
 const fs = require("fs");
 
 async function main() {
@@ -9,7 +10,7 @@ async function main() {
   // SimplePayment 컨트랙트 배포 준비 객체를 가져옵니다.
   const SimplePayment = await ethers.getContractFactory("SimplePayment");
 
-  // 로컬 Hardhat 네트워크에 컨트랙트를 배포합니다.
+  // 현재 선택된 네트워크에 컨트랙트를 배포합니다.
   const simplePayment = await SimplePayment.deploy();
   await simplePayment.waitForDeployment();
 
@@ -18,8 +19,15 @@ async function main() {
 
   // 다음 실습 단계에서 결제 스크립트가 주소를 읽을 수 있도록 저장합니다.
   fs.writeFileSync(
-    "deployed.json",
-    JSON.stringify({ SimplePayment: address }, null, 2)
+    `deployed.${hre.network.name}.json`,
+    JSON.stringify(
+      {
+        network: hre.network.name,
+        SimplePayment: address
+      },
+      null,
+      2
+    )
   );
 }
 
@@ -27,4 +35,3 @@ main().catch((error) => {
   console.error(error);
   process.exitCode = 1;
 });
-
