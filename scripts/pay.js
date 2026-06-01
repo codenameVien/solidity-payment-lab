@@ -30,7 +30,10 @@ async function main() {
   const receipt = await tx.wait();
   console.log("확인된 블록:", receipt.blockNumber);
 
-  const balance = await simplePayment.getBalance();
+  const balance = await ethers.provider.getBalance(
+    contractAddress,
+    receipt.blockNumber
+  );
   console.log("컨트랙트 잔액:", ethers.formatEther(balance), "ETH");
 }
 
