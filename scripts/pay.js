@@ -20,9 +20,9 @@ async function main() {
     payer
   );
 
-  // pay 함수에 0.01 ETH를 함께 보내 결제를 실행합니다.
+  // pay 함수에 0.000001 ETH를 함께 보내 결제를 실행합니다.
   const tx = await simplePayment.pay("첫 번째 로컬 결제", {
-    value: ethers.parseEther("0.01")
+    value: ethers.parseEther("0.000001")
   });
 
   console.log("결제 트랜잭션:", tx.hash);
