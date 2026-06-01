@@ -74,7 +74,7 @@ npm run pay
 결제 대상 컨트랙트: 0x5Fb...
 결제 트랜잭션: 0x...
 확인된 블록: 2
-컨트랙트 잔액: 0.01 ETH
+컨트랙트 잔액: 0.000001 ETH
 ```
 
 ## Why Keep The Node Running?
@@ -174,7 +174,7 @@ npx hardhat run scripts/pay.js --network baseSepolia
 
 이 명령은 테스트넷 ETH를 실제로 전송합니다.
 
-현재 스크립트는 `0.01 ETH`를 보내도록 되어 있습니다. 테스트넷이지만 지갑 잔액이 부족하면 실패합니다.
+현재 스크립트는 `0.000001 ETH`를 보내도록 되어 있습니다. 테스트넷이지만 지갑 잔액이 부족하면 실패합니다.
 
 ### 6. Basescan에서 확인
 
