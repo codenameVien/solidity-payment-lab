@@ -114,6 +114,7 @@ cp .env.example .env
 ```text
 BASE_SEPOLIA_RPC_URL=https://sepolia.base.org
 PRIVATE_KEY=테스트넷_지갑_개인키
+PAYMENT_AMOUNT_ETH=0.000001
 ```
 
 `PRIVATE_KEY`는 `0x`로 시작하는 형식이어도 되고, `0x` 없이 넣어도 됩니다.
@@ -174,7 +175,9 @@ npx hardhat run scripts/pay.js --network baseSepolia
 
 이 명령은 테스트넷 ETH를 실제로 전송합니다.
 
-현재 스크립트는 `0.000001 ETH`를 보내도록 되어 있습니다. 테스트넷이지만 지갑 잔액이 부족하면 실패합니다.
+현재 스크립트는 `.env`의 `PAYMENT_AMOUNT_ETH`만큼 ETH를 보내도록 되어 있습니다.
+
+기본값은 `0.000001 ETH`입니다. 테스트넷이지만 지갑 잔액이 부족하면 실패합니다.
 
 ### 6. Basescan에서 확인
 
