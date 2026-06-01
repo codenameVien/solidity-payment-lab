@@ -190,7 +190,41 @@ https://sepolia.basescan.org/tx/트랜잭션_해시
 https://sepolia.basescan.org/address/컨트랙트_주소
 ```
 
-### 7. 자주 나는 오류
+### 7. 이번 실습 결과
+
+이번 실습에서 Base Sepolia에 배포한 컨트랙트 주소입니다.
+
+```text
+0xfd1e91B1C44AAcB1a2294B492eBBe6D17C65fDad
+```
+
+컨트랙트 확인 링크:
+
+```text
+https://sepolia.basescan.org/address/0xfd1e91B1C44AAcB1a2294B492eBBe6D17C65fDad
+```
+
+결제 트랜잭션 해시입니다.
+
+```text
+0xce65dfda936837437386dd396692a6780555bb8ad5bbca782be54edd8a2ef458
+```
+
+결제 트랜잭션 확인 링크:
+
+```text
+https://sepolia.basescan.org/tx/0xce65dfda936837437386dd396692a6780555bb8ad5bbca782be54edd8a2ef458
+```
+
+확인 결과:
+
+```text
+결제 금액: 0.000001 ETH
+컨트랙트 잔액: 0.000001 ETH
+트랜잭션 상태: 성공
+```
+
+### 8. 자주 나는 오류
 
 `insufficient funds for intrinsic transaction cost`
 
