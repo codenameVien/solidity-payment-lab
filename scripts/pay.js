@@ -8,7 +8,7 @@ async function main() {
   );
   const contractAddress = deployed.SimplePayment;
 
-  const [, payer] = await ethers.getSigners();
+  const [payer] = await ethers.getSigners();
 
   console.log("결제 지갑:", payer.address);
   console.log("결제 대상 컨트랙트:", contractAddress);
