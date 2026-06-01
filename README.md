@@ -89,7 +89,21 @@ npm run pay
 
 로컬 실습이 끝나면 같은 컨트랙트를 Base Sepolia 테스트넷에도 배포할 수 있습니다.
 
-### 1. 환경변수 파일 생성
+### 1. 테스트넷 전용 지갑 준비
+
+Base Sepolia 배포에는 테스트넷 전용 지갑을 사용합니다.
+
+실제 자산이 들어 있는 메인넷 지갑 개인키는 절대 사용하지 않습니다.
+
+권장 방식:
+
+```text
+새 테스트 지갑 생성
+-> Base Sepolia ETH 충전
+-> 이 실습 저장소의 .env에만 개인키 입력
+```
+
+### 2. 환경변수 파일 생성
 
 ```bash
 cp .env.example .env
@@ -102,19 +116,98 @@ BASE_SEPOLIA_RPC_URL=https://sepolia.base.org
 PRIVATE_KEY=테스트넷_지갑_개인키
 ```
 
-실제 자산이 들어 있는 메인넷 지갑 개인키는 절대 사용하지 않습니다.
+`PRIVATE_KEY`는 `0x`로 시작하는 형식이어도 되고, `0x` 없이 넣어도 됩니다.
 
-### 2. 테스트넷 ETH 준비
+`.env`는 `.gitignore`에 포함되어 있으므로 Git에 올라가지 않습니다.
+
+### 3. 테스트넷 ETH 준비
 
 Base Sepolia에 배포하려면 배포 지갑에 Base Sepolia ETH가 필요합니다.
 
-### 3. Base Sepolia 배포
+배포 전에 지갑에 테스트넷 ETH가 있는지 확인합니다.
+
+```text
+배포 지갑 주소 복사
+-> Base Sepolia faucet에서 테스트넷 ETH 받기
+-> 지갑 잔액 확인
+```
+
+### 4. Base Sepolia 배포
+
+컴파일을 먼저 확인합니다.
+
+```bash
+npm run compile
+```
+
+Base Sepolia에 배포합니다.
 
 ```bash
 npx hardhat run scripts/deploy.js --network baseSepolia
 ```
 
+예상 출력:
+
+```text
+배포 지갑: 0x...
+SimplePayment 배포 주소: 0x...
+```
+
 배포 주소는 `deployed.baseSepolia.json`에 저장됩니다.
+
+### 5. Base Sepolia 결제 호출
+
+Base Sepolia에 배포한 컨트랙트의 `pay` 함수를 호출할 수도 있습니다.
+
+```bash
+npx hardhat run scripts/pay.js --network baseSepolia
+```
+
+이 명령은 테스트넷 ETH를 실제로 전송합니다.
+
+현재 스크립트는 `0.01 ETH`를 보내도록 되어 있습니다. 테스트넷이지만 지갑 잔액이 부족하면 실패합니다.
+
+### 6. Basescan에서 확인
+
+배포 또는 결제 후 출력된 트랜잭션 해시를 Base Sepolia Basescan에서 확인합니다.
+
+```text
+https://sepolia.basescan.org/tx/트랜잭션_해시
+```
+
+컨트랙트 주소는 아래 주소에서 확인할 수 있습니다.
+
+```text
+https://sepolia.basescan.org/address/컨트랙트_주소
+```
+
+### 7. 자주 나는 오류
+
+`insufficient funds for intrinsic transaction cost`
+
+```text
+배포 지갑에 Base Sepolia ETH가 부족합니다.
+```
+
+`invalid private key`
+
+```text
+.env의 PRIVATE_KEY 값이 잘못되었습니다.
+공백이나 따옴표가 들어갔는지 확인합니다.
+```
+
+`network does not support ENS`
+
+```text
+주소 자리에 실제 0x 주소가 아닌 이름이나 빈 값이 들어갔을 가능성이 큽니다.
+```
+
+`could not detect network`
+
+```text
+RPC URL에 연결하지 못했습니다.
+BASE_SEPOLIA_RPC_URL 값을 확인합니다.
+```
 
 ## Commit Message Rule
 
